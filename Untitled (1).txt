@@ -1,0 +1,44 @@
+.data
+paquetes:     .word 45
+              .space 28
+registro:     .word 60
+              .space 28
+estado:       .word 0
+
+.text
+.globl main
+
+main:
+    la   $s4, paquetes
+    la   $s5, registro
+    la   $s6, estado
+
+    lw   $t4, 0($s4)
+    add  $t5, $t4, $t4
+    sub  $t6, $t5, $t4
+
+    add  $t7, $t4, $t5
+    addi $t4, $zero, 15
+
+    add  $t8, $t5, $t6
+    sub  $t8, $t5, $t4
+
+    add  $t9, $t5, $t6
+    sub  $t0, $t5, $t6
+
+    lw   $t1, 0($s5)
+    add  $t2, $t9, $t0
+
+    beq  $t2, $zero, CERO
+    addi $t3, $zero, 505
+
+    sw   $t3, 0($s6)
+    j    FIN
+
+CERO:
+    addi $t3, $zero, 0
+    sw   $t3, 0($s6)
+
+FIN:
+    li   $v0, 10
+    syscall
